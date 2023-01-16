@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # LetsChat
 ### Fully Featured Chat App Using Firebase, RiverPod and much more.
 
@@ -23,3 +24,7 @@ LetsChat app built with Riverpod State Management, Firebase for authentication, 
 <b>State Management: </b>Riverpod<br>
 
 ![Lets-Chat-App-Screenshot](images/lets_chat_screens.png)
+=======
+# letschat
+Chatting app
+>>>>>>> 85f583a62930878d676ebf01512a119189a4d915

@@ -1,0 +1,16 @@
+macos/
+build/
+.flutter-plugins-dependencies
+
+
+windows/
+
+
+web/manifest.json
+
+
+linux/
+
+
+
+.dart_tool/

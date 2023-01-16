@@ -1,6 +1,8 @@
 class StringsConsts {
   // app name.
   static const String appName = 'Chats';
+  static const String call = 'Calls';
+  static const String incident = 'Incident report';
   // firestore
   static const String usersCollection = 'users';
   static const String groupsCollection = 'groups';

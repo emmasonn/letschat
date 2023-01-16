@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:lets_chat/screens/incidents/screens/incident_screen.dart';
 import '../../../utils/constants/colors_constants.dart';
 import '../../../utils/constants/string_constants.dart';
 import '../../chat/widgets/chats_list.dart';
 import '../../call/screens/calls_screen.dart';
 import '../../sender_info/controllers/sender_user_data_controller.dart';
-import '../../status/screens/status_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -51,7 +51,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(context),
       body: IndexedStack(index: index, children: const [
         CallsScreen(),
         ChatsList(),

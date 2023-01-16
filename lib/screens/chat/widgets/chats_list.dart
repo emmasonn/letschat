@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:lets_chat/utils/constants/colors_constants.dart';
 import '../../../models/chat.dart';
 import '../controllers/chat_controller.dart';
 import 'no_chat.dart';
@@ -13,22 +15,25 @@ class ChatsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return StreamBuilder<List<Chat>>(
-      stream: ref.watch(chatControllerProvider).getChatsList(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return const Loader();
-        }
-        return snapshot.data!.isEmpty
-            ? const NoChat()
-            : ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  Chat chat = snapshot.data![index];
-                  return _buildChatListItem(context, index, chat);
-                },
-              );
-      },
+    return Scaffold(
+      appBar: _buildAppBar(context),
+      body: StreamBuilder<List<Chat>>(
+        stream: ref.watch(chatControllerProvider).getChatsList(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Loader();
+          }
+          return snapshot.data!.isEmpty
+              ? const NoChat()
+              : ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    Chat chat = snapshot.data![index];
+                    return _buildChatListItem(context, index, chat);
+                  },
+                );
+        },
+      ),
     );
   }
 
@@ -71,6 +76,38 @@ class ChatsList extends ConsumerWidget {
               fontSize: size.width * 0.030,
             ),
       ),
+    );
+  }
+
+  /// AppBar of the home screen
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      centerTitle: false,
+      systemOverlayStyle: const SystemUiOverlayStyle(
+        statusBarColor: AppColors.primary,
+      ),
+      title: Text(
+        StringsConsts.appName,
+        style: Theme.of(context).appBarTheme.titleTextStyle?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+      ),
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.search,
+            color: AppColors.appBarActionIcon,
+          ),
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.settings_rounded,
+            color: AppColors.appBarActionIcon,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -6,10 +6,12 @@ class RoundButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
+    this.color,
   });
 
   final String text;
   final VoidCallback onPressed;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class RoundButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
+            backgroundColor: color ?? AppColors.primary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),
@@ -34,6 +36,7 @@ class RoundButton extends StatelessWidget {
           child: Text(
             text,
             style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                  color: color != null ? AppColors.primary : AppColors.white,
                   fontSize: size.width * 0.04,
                 ),
           ),

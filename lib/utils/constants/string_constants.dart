@@ -3,6 +3,7 @@ class StringsConsts {
   static const String appName = 'Chats';
   static const String call = 'Calls';
   static const String incident = 'Incident report';
+  static const String settings = 'Settings';
   // firestore
   static const String usersCollection = 'users';
   static const String groupsCollection = 'groups';

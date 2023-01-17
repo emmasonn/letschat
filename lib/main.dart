@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lets_chat/providers.dart';
 import 'firebase_options.dart';
 import 'router/router.dart';
 import 'screens/sender_info/controllers/sender_user_data_controller.dart';
@@ -56,17 +55,17 @@ class MyApp extends ConsumerWidget {
   }
 
   //decide screen to show using loggedIn Provider
-  Widget _getHomeWidget2(WidgetRef ref) {
-    return ref.watch(isLoggedProvider).when<Widget>(
-          data: (bool isLogged) {
-            if (!isLogged) return const LandingScreen();
-            // currentUserProvider ??= Provider((ref) => user);
-            return const HomeScreen();
-          },
-          error: (error, stackTrace) => ErrorScreen(
-            error: error.toString(),
-          ),
-          loading: () => const LoadingScreen(),
-        );
-  }
+  // Widget _getHomeWidget2(WidgetRef ref) {
+  //   return ref.watch(isLoggedProvider).when<Widget>(
+  //         data: (bool isLogged) {
+  //           if (!isLogged) return const LandingScreen();
+  //           // currentUserProvider ??= Provider((ref) => user);
+  //           return const HomeScreen();
+  //         },
+  //         error: (error, stackTrace) => ErrorScreen(
+  //           error: error.toString(),
+  //         ),
+  //         loading: () => const LoadingScreen(),
+  //       );
+  // }
 }

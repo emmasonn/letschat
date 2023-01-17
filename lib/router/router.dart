@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:lets_chat/screens/home/screens/home_page.dart';
+import 'package:lets_chat/screens/settings/screens/settings_screen.dart';
 import 'package:page_route_animator/page_route_animator.dart';
 import '../models/status.dart';
 import '../screens/auth/screens/otp_page.dart';
@@ -64,6 +65,12 @@ class AppRouter {
       case AppRoutes.statusScreen:
         return PageRouteAnimator(
           child: const StatusScreen(),
+          routeAnimation: RouteAnimation.rightToLeft,
+          settings: settings,
+        );
+      case AppRoutes.settingScreen:
+        return PageRouteAnimator(
+          child: const SettingScreen(),
           routeAnimation: RouteAnimation.rightToLeft,
           settings: settings,
         );

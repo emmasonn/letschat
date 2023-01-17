@@ -40,6 +40,7 @@ class _SelectReceiverContactScreenState
 
   AppBar _buildAppBar() {
     return AppBar(
+      centerTitle: false,
       iconTheme: Theme.of(context).iconTheme.copyWith(
             color: AppColors.onPrimary,
           ),

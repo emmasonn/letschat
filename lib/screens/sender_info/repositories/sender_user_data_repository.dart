@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,6 +32,9 @@ class SenderUserDataRepository {
 
   /// Invoke method to get current user data
   Future<app.User?> getSenderUserData() async {
+    if (_auth.currentUser == null) {
+      return null;
+    }
     final userData = await _firestore
         .collection(StringsConsts.usersCollection)
         .doc(_auth.currentUser?.uid)

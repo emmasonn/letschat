@@ -54,7 +54,7 @@ class _SenderUserInformationScreenState
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                addVerticalSpace(_size.width * 0.3),
+                addVerticalSpace(_size.width * 0.2),
                 _buildInfoText(),
                 addVerticalSpace(_size.width * 0.08),
                 _buildProfileImage(),

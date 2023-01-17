@@ -17,6 +17,13 @@ class ChatsList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: _buildAppBar(context),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.primary,
+        onPressed: () {
+          Navigator.pushNamed(context, AppRoutes.selectContactScreen);
+        },
+        child: const Icon(Icons.chat_rounded),
+      ),
       body: StreamBuilder<List<Chat>>(
         stream: ref.watch(chatControllerProvider).getChatsList(),
         builder: (context, snapshot) {
@@ -101,7 +108,9 @@ class ChatsList extends ConsumerWidget {
           ),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, AppRoutes.settingScreen);
+          },
           icon: const Icon(
             Icons.settings_rounded,
             color: AppColors.appBarActionIcon,

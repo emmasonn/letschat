@@ -191,10 +191,8 @@ class _PhoneLoginScreenState extends ConsumerState<PhoneLoginScreen> {
       final authController = ref.read<AuthController>(authControllerProvider);
 
       authController
-          .signInWithPhone(
-        context,
-        phoneNumber: '+$_countryCode${_phoneNoController.text}',
-      )
+          .signInWithPhone(context,
+              phoneNumber: '+$_countryCode${_phoneNoController.text}')
           .whenComplete(() {
         if (mounted) {
           setState(() => _isLoading = false);

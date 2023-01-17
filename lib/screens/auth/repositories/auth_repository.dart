@@ -32,9 +32,9 @@ class AuthRepository {
         phoneNumber: phoneNumber,
         verificationCompleted: (_) {},
         verificationFailed: (FirebaseAuthException error) {
-          showSnackBar(context,
-              content:
-                  'Verification failed, comfirm you\'re entering the correct Otp.');
+          // showSnackBar(context,
+          //     content:
+          //         'Verification failed, comfirm you\'re entering the correct Otp.');
           throw Exception(error.message);
         },
         codeSent: (String verificationId, int? forceResendingToken) {

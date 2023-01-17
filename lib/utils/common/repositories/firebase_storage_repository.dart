@@ -21,6 +21,9 @@ class FirebaseStorageRepository {
     required String fileName,
   }) async {
     try {
+      // final ref = _firebaseStorage.ref().child(path).child(fileName);
+      // final snapshot = await ref.putFile(file);
+      // return await snapshot.ref.getDownloadURL();
       UploadTask imageUploadTask =
           _firebaseStorage.ref().child(path).child(fileName).putFile(file);
       TaskSnapshot snapshot = await imageUploadTask;

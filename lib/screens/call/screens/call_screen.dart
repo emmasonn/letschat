@@ -28,7 +28,6 @@ class _CallScreenState extends ConsumerState<CallScreen> {
   @override
   void initState() {
     super.initState();
-
     client = AgoraClient(
       agoraConnectionData: AgoraConnectionData(
         appId: AgoraConfig.appId,
@@ -36,7 +35,6 @@ class _CallScreenState extends ConsumerState<CallScreen> {
         tokenUrl: AgoraConfig.tokenBaseUrl,
       ),
     );
-
     initAgora();
   }
 

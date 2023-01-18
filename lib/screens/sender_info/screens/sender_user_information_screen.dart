@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:iconsax/iconsax.dart';
 import '../../../utils/common/widgets/helper_widgets.dart';
 import '../../../utils/common/widgets/round_button.dart';
 import '../../../utils/common/helper_methods/util_methods.dart';
@@ -169,7 +170,7 @@ class _SenderUserInformationScreenState
               padding: const EdgeInsets.all(0),
               onPressed: _selectImage,
               icon: Icon(
-                Icons.add_a_photo,
+                Iconsax.camera5,
                 color: AppColors.white,
                 size: _size.width * 0.06,
               ),

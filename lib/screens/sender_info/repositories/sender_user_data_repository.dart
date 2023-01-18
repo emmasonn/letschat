@@ -48,6 +48,18 @@ class SenderUserDataRepository {
     return user;
   }
 
+  // invoke method to get current user as stream
+  Stream<app.User?> getUser() {
+    return _firestore
+        .collection(StringsConsts.usersCollection)
+        .where('uid', isEqualTo: _auth.currentUser!.uid)
+        .snapshots()
+        .map((usersMap) {
+      final userDoc = usersMap.docs.first;
+      return app.User.fromMap(userDoc.data());
+    });
+  }
+
   /// invoke to save user data to Firebase.
   Future<void> saveSenderUserDataToFirebase(
     BuildContext context,

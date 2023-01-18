@@ -1,5 +1,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lets_chat/utils/constants/dimension_constants.dart';
 import '../../../utils/common/widgets/helper_widgets.dart';
@@ -119,6 +120,10 @@ class _PhoneLoginScreenState extends ConsumerState<PhoneLoginScreen> {
         maxLines: null,
         expands: true,
         keyboardType: TextInputType.number,
+        inputFormatters: [
+          FilteringTextInputFormatter.deny(RegExp(r'^0')),
+          FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+        ],
         decoration: InputDecoration(
           prefixIcon: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -156,7 +161,7 @@ class _PhoneLoginScreenState extends ConsumerState<PhoneLoginScreen> {
               DimensionConstants.cornerRadius,
             ),
           ),
-          hintText: '8122 8493 233',
+          hintText: '812 849 233',
           hintStyle: Theme.of(context).textTheme.displaySmall?.copyWith(
                 color: AppColors.grey,
                 fontSize: _size.width * 0.05,

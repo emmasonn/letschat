@@ -3,8 +3,10 @@ class AppRoutes {
   static const String chatScreen = '/chat';
   static const String landingScreen = '/landing';
   static const String phoneLoginScreen = '/phone-login';
+  static const String editAccount = '/edit-account';
   static const String otpScreen = '/otp';
   static const String userInformationScreen = '/user-information';
+  static const String membersScreen = '/members';
   static const String selectContactScreen = '/select-contact';
   static const String settingScreen = '/setting';
   static const String statusScreen = '/status';

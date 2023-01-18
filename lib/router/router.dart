@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart';
+import 'package:lets_chat/screens/contact/screens/user_contacts_screen.dart';
 import 'package:lets_chat/screens/home/screens/home_page.dart';
 import 'package:lets_chat/screens/settings/screens/settings_screen.dart';
+import 'package:lets_chat/screens/settings/screens/user_edit_screen.dart';
 import 'package:page_route_animator/page_route_animator.dart';
 import '../models/status.dart';
 import '../screens/auth/screens/otp_page.dart';
@@ -50,9 +52,21 @@ class AppRouter {
           routeAnimation: RouteAnimation.rightToLeft,
           settings: settings,
         );
+      case AppRoutes.editAccount:
+        return PageRouteAnimator(
+          child: const UserEditScreen(),
+          routeAnimation: RouteAnimation.rightToLeft,
+          settings: settings,
+        );
       case AppRoutes.chatScreen:
         return PageRouteAnimator(
           child: const ChatScreen(),
+          routeAnimation: RouteAnimation.rightToLeft,
+          settings: settings,
+        );
+      case AppRoutes.membersScreen:
+        return PageRouteAnimator(
+          child: const UserContactsScreen(),
           routeAnimation: RouteAnimation.rightToLeft,
           settings: settings,
         );

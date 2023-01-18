@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lets_chat/utils/constants/routes_constants.dart';
 import 'package:lets_chat/utils/constants/string_constants.dart';
 import '../../../utils/constants/colors_constants.dart';
 
@@ -39,7 +40,9 @@ class CallsScreen extends ConsumerWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, AppRoutes.settingScreen);
+          },
           icon: const Icon(
             Icons.settings_rounded,
             color: AppColors.appBarActionIcon,

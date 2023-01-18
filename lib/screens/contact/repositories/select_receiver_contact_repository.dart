@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:lets_chat/utils/phone_number_util.dart';
 import '../../../models/user.dart' as app;
 import '../../../utils/common/widgets/helper_widgets.dart';
 import '../../../utils/constants/routes_constants.dart';
@@ -18,7 +20,7 @@ class SelectReceiverContactsRepository {
   final FirebaseFirestore _firestore;
 
   /// invoke to Get all contacts (fully fetched)
-  Future<List<Contact>> getReceiverContacts(BuildContext context) async {
+  Future<List<Contact>> getReceiverContacts() async {
     List<Contact> contactsList = [];
     try {
       if (await FlutterContacts.requestPermission()) {
@@ -28,10 +30,29 @@ class SelectReceiverContactsRepository {
         );
       }
     } catch (e) {
-      showSnackBar(context, content: e.toString());
+      Fluttertoast.showToast(msg: e.toString());
     }
 
     return contactsList;
+  }
+
+  ///search contacts on firebase to and
+  ///and filter the ones that has account with us.
+  Future<List<app.User>> getRegisteredContact(BuildContext context) async {
+    //collects and process all the users contact to a single list a
+    final uPhones = (await getReceiverContacts()).map((contact) {
+      String number = contact.phones[0].number.replaceAll(' ', '');
+      return processNumber(number);
+    }).toList();
+
+    final userDocs = await _firestore
+        .collection(StringsConsts.usersCollection)
+        .where('phoneNumber', whereIn: uPhones)
+        .get();
+
+    return userDocs.docs.map((userDoc) {
+      return app.User.fromMap(userDoc.data());
+    }).toList();
   }
 
   /// invoke to select specific user if it exists

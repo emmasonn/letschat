@@ -31,6 +31,11 @@ class SenderUserDataController {
     return await _senderUserDataRepository.getSenderUserData();
   }
 
+  ///invoke method to get user data as stream
+  Stream<app.User?> getUserDataStream() {
+    return _senderUserDataRepository.getUser();
+  }
+
   /// invoke to save user data to Firebase.
   Future<void> saveSenderUserDataToFirebase(
     BuildContext context,

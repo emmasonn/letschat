@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:lets_chat/utils/constants/colors_constants.dart';
+import 'package:lets_chat/utils/image_processor.dart';
 import '../../../models/chat.dart';
 import '../controllers/chat_controller.dart';
 import 'no_chat.dart';
@@ -20,7 +22,7 @@ class ChatsList extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primary,
         onPressed: () {
-          Navigator.pushNamed(context, AppRoutes.selectContactScreen);
+          Navigator.pushNamed(context, AppRoutes.membersScreen);
         },
         child: const Icon(Icons.chat_rounded),
       ),
@@ -33,6 +35,7 @@ class ChatsList extends ConsumerWidget {
           return snapshot.data!.isEmpty
               ? const NoChat()
               : ListView.builder(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     Chat chat = snapshot.data![index];
@@ -71,11 +74,18 @@ class ChatsList extends ConsumerWidget {
               fontSize: size.width * 0.035,
             ),
       ),
+      horizontalTitleGap: 5.0,
       leading: CircleAvatar(
-        radius: 30.0,
-        backgroundImage: NetworkImage(
-          chat.profilePic,
-        ),
+        maxRadius: 38.0,
+        minRadius: 35.0,
+        backgroundColor: AppColors.primary.withOpacity(0.6),
+        child: chat.profilePic.isNotEmpty
+            ? loadImageWidget(chat.profilePic)
+            : const Icon(
+                Iconsax.user,
+                color: AppColors.primary,
+                size: 36,
+              ),
       ),
       trailing: Text(
         DateFormat.Hm().format(chat.time),

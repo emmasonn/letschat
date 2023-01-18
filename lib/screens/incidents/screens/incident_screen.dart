@@ -96,7 +96,9 @@ class _StatusScreenState extends ConsumerState<StatusScreen> {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, AppRoutes.settingScreen);
+          },
           icon: const Icon(
             Icons.settings_rounded,
             color: AppColors.appBarActionIcon,

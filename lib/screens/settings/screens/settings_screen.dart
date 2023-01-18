@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:lets_chat/models/user.dart' as app;
+import 'package:lets_chat/screens/sender_info/controllers/sender_user_data_controller.dart';
 import 'package:lets_chat/utils/constants/colors_constants.dart';
+import 'package:lets_chat/utils/constants/routes_constants.dart';
 import 'package:lets_chat/utils/constants/string_constants.dart';
+import 'package:lets_chat/utils/image_processor.dart';
 
 class SettingScreen extends ConsumerStatefulWidget {
   const SettingScreen({super.key});
@@ -14,7 +17,7 @@ class SettingScreen extends ConsumerStatefulWidget {
 }
 
 class _SettingScreenState extends ConsumerState<SettingScreen> {
-  late Map<String, Object> userData;
+  app.User? userData;
   late Size size;
 
   @override
@@ -23,7 +26,15 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
     //     ModalRoute.of(context)?.settings.arguments as Map<String, Object>;
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: _buildBody(context),
+      body: StreamBuilder<app.User?>(
+          stream:
+              ref.watch(senderUserDataControllerProvider).getUserDataStream(),
+          builder: (context, snapshot) {
+            if (snapshot.data != null) {
+              userData = snapshot.data;
+            }
+            return _buildBody(context);
+          }),
     );
   }
 
@@ -41,6 +52,62 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
         style: Theme.of(context).appBarTheme.titleTextStyle?.copyWith(
               fontWeight: FontWeight.w600,
             ),
+      ),
+    );
+  }
+
+  Widget _profileBody() {
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundColor: AppColors.primary.withOpacity(0.8),
+        minRadius: 35,
+        maxRadius: 45,
+        child: userData != null && userData!.profilePic != null
+            ? loadImageWidget(userData!.profilePic!)
+            : const Icon(
+                Iconsax.user,
+                color: AppColors.primary,
+                size: 36,
+              ),
+      ),
+      horizontalTitleGap: 5.0,
+      title: Text(
+        userData?.name ?? '',
+        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+              fontSize: size.width * 0.04,
+            ),
+      ),
+      subtitle: Text(
+        userData?.phoneNumber ?? '',
+        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+              color: AppColors.grey,
+              fontSize: size.width * 0.04,
+            ),
+      ),
+      trailing: InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, AppRoutes.editAccount);
+        },
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Iconsax.edit5,
+              size: 24,
+              color: AppColors.primary,
+            ),
+            const SizedBox(
+              width: 5.0,
+            ),
+            Text(
+              'Edit',
+              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    color: AppColors.primary,
+                    fontSize: size.width * 0.03,
+                  ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -89,53 +156,6 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
         ),
       ],
     ));
-  }
-
-  Widget _profileBody() {
-    return ListTile(
-      leading: CircleAvatar(
-        backgroundColor: AppColors.primary.withOpacity(0.1),
-        radius: 30,
-        child: const Icon(
-          Iconsax.user,
-          color: AppColors.primary,
-          size: 36,
-        ),
-      ),
-      title: Text(
-        'Nnamani Emmanuel',
-        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-              fontSize: size.width * 0.04,
-            ),
-      ),
-      subtitle: Text(
-        '+23408123438',
-        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-              color: AppColors.grey,
-              fontSize: size.width * 0.04,
-            ),
-      ),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(
-            Iconsax.edit5,
-            size: 24,
-            color: AppColors.primary,
-          ),
-          const SizedBox(
-            width: 5.0,
-          ),
-          Text(
-            'Edit',
-            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  color: AppColors.primary,
-                  fontSize: size.width * 0.03,
-                ),
-          )
-        ],
-      ),
-    );
   }
 
   Widget _settingsItem({
